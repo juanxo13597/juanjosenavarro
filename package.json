@@ -1,0 +1,21 @@
+{
+  "name": "juanjosenavarroperea",
+  "version": "1.0.0",
+  "description": "",
+  "workspaces": [
+    "front",
+    "back"
+  ],
+  "scripts": {
+    "start:front": "npm run start --workspace=front",
+    "start:back": "npm run start:dev --workspace=back",
+    "build": "npm run build --workspace=front && npm run build --workspace=back",
+    "start": "npm run start --workspace=back"
+  },
+  "keywords": [],
+  "author": "Juan José Navarro Perea",
+  "license": "ISC",
+  "dependencies": {
+    
+  }
+}
