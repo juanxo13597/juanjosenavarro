@@ -5,21 +5,21 @@ export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ unique: true })
-  username: string;
+  @Column({ nullable: false })
+  email: string;
 
-  @Column({ length: 50 })
+  @Column({ length: 50, nullable: true })
   name: string;
 
-  @Column({ length: 50 })
+  @Column({ length: 50, nullable: true })
   lastname: string;
 
-  @Column()
+  @Column({ nullable: false })
   password: string;
 
   @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
 
-  @Column({ default: true })
+  @Column({ default: false })
   isActive: boolean;
 }

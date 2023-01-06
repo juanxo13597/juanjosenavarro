@@ -2,13 +2,11 @@ import { Module } from '@nestjs/common';
 import { join } from 'path';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserModule } from './user/user.module';
+import { RouterModule } from '@nestjs/core';
 
 @Module({
   imports: [
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', '..', 'front/dist'),
-      exclude: ['/api*'],
-    }),
     TypeOrmModule.forRootAsync({
       useFactory: () => ({
         type: 'mysql',
@@ -22,6 +20,17 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         autoLoadEntities: true,
       }),
     }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', '..', 'front/dist'),
+      exclude: ['/api/*'],
+    }),
+    UserModule,
+    RouterModule.register([
+      {
+        path: 'user',
+        module: UserModule,
+      },
+    ]),
   ],
   controllers: [],
   providers: [],
