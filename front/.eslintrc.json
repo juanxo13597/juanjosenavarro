@@ -1,0 +1,38 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "plugin:prettier/recommended",
+    "plugin:@angular-eslint/recommended"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
+  "rules": {
+    // Aquí se pueden especificar reglas propias para ESLint, así como para sobrescribir las reglas que ya existen.
+  },
+  "overrides": [
+    {
+      "files": ["src/**/*.spec.ts"],
+      "parser": "@typescript-eslint/parser",
+      "extends": ["plugin:jasmine/recommended"],
+      "plugins": ["jasmine"],
+      "env": { "jasmine": true }
+    },
+    {
+      "files": ["*.component.html"],
+      "parser": "@angular-eslint/template-parser",
+      "rules": {
+        "@typescript-eslint/dot-notation": "off",
+        "@typescript-eslint/no-implied-eval": "off",
+        "@typescript-eslint/no-throw-literal": "off",
+        "strict": "off",
+        "import/first": "off",
+        "lines-around-directive": "off"
+      },
+      "plugins": ["@angular-eslint/template"]
+    }
+  ]
+}

@@ -10,6 +10,7 @@
     "start:front": "npm run start --workspace=front",
     "start:back": "npm run start:dev --workspace=back",
     "build": "npm run build --workspace=front && npm run build --workspace=back",
+    "lint": "npm run lint --workspace=front && npm run lint --workspace=back",
     "start": "npm run start:prod --workspace=back"
   },
   "engines": {
