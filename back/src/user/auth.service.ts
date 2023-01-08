@@ -4,7 +4,7 @@ import { UtilsService } from '../shared/services/utils.service';
 import { RegisterUserDto } from './../dtos/userRegister.dto';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { hash, compare } from 'bcrypt';
-import { User } from 'src/entities/user.entity';
+import { User } from '../entities/user.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -65,7 +65,7 @@ export class AuthService {
    * @param user
    * @returns
    */
-  async login(user: LoginUserDto): Promise<JwtModel | HttpException> {
+  async loginUser(user: LoginUserDto): Promise<JwtModel | HttpException> {
     // ! -validated params
     if (!this.UtilsService.validationExistParams(user, ['email', 'password'])) {
       return new HttpException(
@@ -99,7 +99,7 @@ export class AuthService {
    * @param token
    * @returns
    */
-  async refresh(token: string): Promise<JwtModel> {
+  async refreshToken(token: string): Promise<JwtModel> {
     const clearToken = token.split('Bearer')[1].trim();
     const decodedToken: any = this.JwtService.decode(clearToken);
 

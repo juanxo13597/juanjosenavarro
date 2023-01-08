@@ -46,7 +46,7 @@ export class AuthController {
   @ApiBody({ type: LoginUserDto, required: true })
   @Post('login')
   loginUser(@Body() user: LoginUserDto): Promise<JwtModel | HttpException> {
-    return this.AuthService.login(user);
+    return this.AuthService.loginUser(user);
   }
 
   /**
@@ -57,6 +57,6 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   @Post('refresh')
   refreshToken(@Headers('Authorization') token: string) {
-    return this.AuthService.refresh(token);
+    return this.AuthService.refreshToken(token);
   }
 }
