@@ -28,12 +28,7 @@ export class AuthService {
       return new HttpException('Invalid format email', HttpStatus.BAD_REQUEST);
     }
     // !-user not found
-    const userFound = await this.userRepository.findOne({
-      where: {
-        email: user.email,
-      },
-    });
-    if (userFound) {
+    if (await this.findUser(user.email)) {
       return new HttpException('User already exits', HttpStatus.FOUND);
     }
 
@@ -47,5 +42,13 @@ export class AuthService {
     const newUser = await this.userRepository.save(user);
     delete newUser.password;
     return newUser;
+  }
+
+  private async findUser(email: string): Promise<User> {
+    return await this.userRepository.findOne({
+      where: {
+        email: email,
+      },
+    });
   }
 }
