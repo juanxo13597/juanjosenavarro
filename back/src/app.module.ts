@@ -4,6 +4,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { RouterModule } from '@nestjs/core';
+import { SharedModule } from './shared/shared.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { RouterModule } from '@nestjs/core';
         module: UserModule,
       },
     ]),
+    SharedModule,
   ],
   controllers: [],
   providers: [],
