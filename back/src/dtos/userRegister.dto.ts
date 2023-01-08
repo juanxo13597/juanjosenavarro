@@ -10,13 +10,13 @@ export class RegisterUserDto {
 
   /** password */
   @ApiProperty({ required: true })
-  password: string;
+  password?: string;
 
   /** nombre del usuario */
   @ApiProperty({ required: false })
-  name: string;
+  name?: string;
 
   /** apellido del usuario */
   @ApiProperty({ required: false })
-  lastname: string;
+  lastname?: string;
 }
