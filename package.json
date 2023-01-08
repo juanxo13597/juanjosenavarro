@@ -18,7 +18,7 @@
     "lint": "npm run lint:front && npm run lint:back",
     "compodoc:front": "npm run compodoc --workspace=front",
     "compodoc:back": "npm run compodoc --workspace=back",
-    "compodoc":"npm run compodoc:front && npm run compodoc:back"
+    "compodoc": "npm run compodoc:front && npm run compodoc:back"
   },
   "engines": {
     "node": "16.14.2"
@@ -26,7 +26,11 @@
   "keywords": [],
   "author": "Juan José Navarro Perea",
   "license": "ISC",
+  "dependencies": {
+    "@nestjs/jwt": "10.0.1",
+    "passport-jwt": "4.0.1"
+  },
   "devDependencies": {
-    
+    "@types/passport-jwt": "3.0.8"
   }
 }

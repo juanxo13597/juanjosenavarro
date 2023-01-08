@@ -1,9 +1,18 @@
+import { JwtAuthGuard } from './../shared/guards/jwt-auth.guard';
+import { JwtModel } from './../models/jwt.model';
 import { LoginUserDto } from './../dtos/userLogin.dto';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { AuthService } from './auth.service';
 import { User } from './../entities/user.entity';
 import { RegisterUserDto } from './../dtos/userRegister.dto';
-import { Body, Controller, HttpException, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  HttpException,
+  Post,
+  UseGuards,
+  Headers,
+} from '@nestjs/common';
 import { ApiBody } from '@nestjs/swagger';
 
 /**
@@ -36,7 +45,18 @@ export class AuthController {
    */
   @ApiBody({ type: LoginUserDto, required: true })
   @Post('login')
-  loginUser(@Body() user: LoginUserDto): Promise<User | HttpException> {
+  loginUser(@Body() user: LoginUserDto): Promise<JwtModel | HttpException> {
     return this.AuthService.login(user);
+  }
+
+  /**
+   * todo: endpoint para refrescar token
+   * @param token
+   * @returns
+   */
+  @UseGuards(JwtAuthGuard)
+  @Post('refresh')
+  refreshToken(@Headers('Authorization') token: string) {
+    return this.AuthService.refresh(token);
   }
 }

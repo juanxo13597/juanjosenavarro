@@ -7,6 +7,9 @@ import { hash, compare } from 'bcrypt';
 import { User } from 'src/entities/user.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { JwtService } from '@nestjs/jwt';
+import { JwtModel } from 'src/models/jwt.model';
 
 /** servicio de autentificacion */
 @Injectable()
@@ -19,6 +22,7 @@ export class AuthService {
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
     private UtilsService: UtilsService,
+    private JwtService: JwtService,
   ) {}
 
   /**
@@ -61,7 +65,7 @@ export class AuthService {
    * @param user
    * @returns
    */
-  async login(user: LoginUserDto) {
+  async login(user: LoginUserDto): Promise<JwtModel | HttpException> {
     // ! -validated params
     if (!this.UtilsService.validationExistParams(user, ['email', 'password'])) {
       return new HttpException(
@@ -83,10 +87,26 @@ export class AuthService {
     if (!checkPassword) {
       return new HttpException('invalid password', HttpStatus.FORBIDDEN);
     }
+    delete findUser.password;
+    const payload = { user: findUser };
+    return {
+      access_token: this.JwtService.sign(payload),
+    };
+  }
 
-    const data = findUser;
+  /**
+   * todo: metodo para refrescar token
+   * @param token
+   * @returns
+   */
+  async refresh(token: string): Promise<JwtModel> {
+    const clearToken = token.split('Bearer')[1].trim();
+    const decodedToken: any = this.JwtService.decode(clearToken);
 
-    return data;
+    const payload = { user: decodedToken.user };
+    return {
+      access_token: this.JwtService.sign(payload),
+    };
   }
 
   /**
