@@ -7,12 +7,18 @@
     "back"
   ],
   "scripts": {
-    "start:front": "npm run start --workspace=front",
     "build:front": "npm run build --workspace=front",
+    "build:back": "npm run build --workspace=back",
+    "build": "npm run build:front && npm run build:back",
+    "start:front": "npm run start --workspace=front",
     "start:back": "npm run start:dev --workspace=back",
-    "build": "npm run build --workspace=front && npm run build --workspace=back",
-    "lint": "npm run lint --workspace=front && npm run lint --workspace=back",
-    "start": "npm run start:prod --workspace=back"
+    "start": "npm run start:prod --workspace=back",
+    "lint:front": "npm run lint --workspace=front",
+    "lint:back": "npm run lint --workspace=back",
+    "lint": "npm run lint:front && npm run lint:back",
+    "compodoc:front": "npm run compodoc --workspace=front",
+    "compodoc:back": "npm run compodoc --workspace=back",
+    "compodoc":"npm run compodoc:front && npm run compodoc:back"
   },
   "engines": {
     "node": "16.14.2"
@@ -20,6 +26,7 @@
   "keywords": [],
   "author": "Juan José Navarro Perea",
   "license": "ISC",
-  "dependencies": {
+  "devDependencies": {
+    
   }
 }
