@@ -193,4 +193,32 @@ describe('UsersService', () => {
       ).toEqual(new HttpException('invalid password', HttpStatus.FORBIDDEN));
     });
   });
+
+  describe('refresh token and ', () => {
+    it(' all success', async () => {
+      jest.spyOn(jwt, 'sign').mockImplementation(() => {
+        return 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2Njg5NTM3ODUsImV4cCI6MTY2ODk2MDk4NX0.gr_l1f7kyF1SNMiCRu9GA7RSfZ6KpJZ2nCvZ86z06Kg';
+      });
+      jest.spyOn(jwt, 'decode').mockImplementation(() => {
+        return {
+          email: 'email@email.es',
+          id: 1,
+          createdAt: new Date(),
+          isActive: false,
+          lastname: 'apellido',
+          name: 'nombre',
+          password:
+            '$2b$10$Ked7ZYf9HvGwO28.JRJRVefInUq43itNw/dmZfKpQ.3q5MeQB/YjC',
+        };
+      });
+      expect(
+        await service.refreshToken(
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2Njg5NTM3ODUsImV4cCI6MTY2ODk2MDk4NX0.gr_l1f7kyF1SNMiCRu9GA7RSfZ6KpJZ2nCvZ86z06Kg',
+        ),
+      ).toEqual({
+        access_token:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2Njg5NTM3ODUsImV4cCI6MTY2ODk2MDk4NX0.gr_l1f7kyF1SNMiCRu9GA7RSfZ6KpJZ2nCvZ86z06Kg',
+      });
+    });
+  });
 });
