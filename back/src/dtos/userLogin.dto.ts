@@ -10,5 +10,5 @@ export class LoginUserDto {
 
   /** contraseña del usuario */
   @ApiProperty({ required: true })
-  password: string;
+  password?: string;
 }
