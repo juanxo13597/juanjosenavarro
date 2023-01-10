@@ -1,6 +1,13 @@
-{{ send.send }}
-{{ send.loading }}
-{{ send.message }}
+<app-alert
+  *ngIf="send.send && !send.loading && send.message"
+  [color]="'success'"
+  [message]="send.message"
+></app-alert>
+
+<app-spinner
+  *ngIf="send.loading && send.send"
+  [color]="'success'"
+></app-spinner>
 
 <div class="card">
   <div class="card-body">

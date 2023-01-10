@@ -19,7 +19,7 @@ import { RegisterPageModel, SendModel } from './register-page.model';
 export class RegisterPageComponent {
   /** tipado para el formulario */
   public registerForm: FormGroup<RegisterPageModel>;
-  public send: SendModel = { send: true, loading: true, message: '' };
+  public send: SendModel = { send: true, loading: false, message: '' };
 
   /**
    * constructor del registro
@@ -66,7 +66,7 @@ export class RegisterPageComponent {
     });
 
     setTimeout(() => {
-      this.send = { send: true, loading: true, message: '' };
+      this.send = { send: true, loading: false, message: '' };
     }, configConstants.timeLoading);
   }
 }
