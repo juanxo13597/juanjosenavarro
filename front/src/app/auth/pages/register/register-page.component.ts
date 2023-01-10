@@ -19,6 +19,8 @@ import { RegisterPageModel, SendModel } from './register-page.model';
 export class RegisterPageComponent {
   /** tipado para el formulario */
   public registerForm: FormGroup<RegisterPageModel>;
+
+  /** modelo para mostrar mensaje */
   public send: SendModel = { send: true, loading: false, message: '' };
 
   /**
