@@ -3,9 +3,9 @@ export type RegisterUserResponseSuccess = {
   email: string;
   name: string;
   lastname: string;
-  id: number;
   createdAt: string;
   isActive: boolean;
+  id?: number;
 
   response?: string;
   status?: number;
