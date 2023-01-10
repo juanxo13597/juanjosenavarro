@@ -46,6 +46,7 @@ describe('RegisterComponent', () => {
       send: true,
       loading: false,
       message: 'Usuario registrado correctamente.',
+      error: false,
     });
 
     // eslint-disable-next-line jasmine/prefer-toHaveBeenCalledWith
@@ -56,6 +57,7 @@ describe('RegisterComponent', () => {
         send: true,
         loading: false,
         message: '',
+        error: false,
       });
       done();
     }, configConstants.timeLoading + 1000);
@@ -78,6 +80,7 @@ describe('RegisterComponent', () => {
       send: true,
       loading: false,
       message: 'El usuario ya existe.',
+      error: true,
     });
 
     // eslint-disable-next-line jasmine/prefer-toHaveBeenCalledWith
@@ -96,6 +99,7 @@ describe('RegisterComponent', () => {
       send: true,
       loading: false,
       message: 'ERROR HTTP',
+      error: true,
     });
 
     // eslint-disable-next-line jasmine/prefer-toHaveBeenCalledWith

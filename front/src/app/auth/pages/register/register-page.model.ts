@@ -25,4 +25,7 @@ export interface SendModel {
 
   /** mensaje a mostrar */
   message: string;
+
+  /** comprobar si el mensaje es de error o no */
+  error: boolean;
 }

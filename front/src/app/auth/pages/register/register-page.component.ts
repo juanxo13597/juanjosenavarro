@@ -21,7 +21,12 @@ export class RegisterPageComponent {
   public registerForm: FormGroup<RegisterPageModel>;
 
   /** modelo para mostrar mensaje */
-  public send: SendModel = { send: true, loading: false, message: '' };
+  public send: SendModel = {
+    send: true,
+    loading: false,
+    message: '',
+    error: false,
+  };
 
   /**
    * constructor del registro
@@ -51,6 +56,7 @@ export class RegisterPageComponent {
             send: true,
             loading: false,
             message: 'El usuario ya existe.',
+            error: true,
           };
         }
         if (resp.id) {
@@ -58,17 +64,23 @@ export class RegisterPageComponent {
             send: true,
             loading: false,
             message: 'Usuario registrado correctamente.',
+            error: false,
           };
           this.registerForm.reset();
         }
       },
       error: () => {
-        this.send = { send: true, loading: false, message: 'ERROR HTTP' };
+        this.send = {
+          send: true,
+          loading: false,
+          message: 'ERROR HTTP',
+          error: true,
+        };
       },
     });
 
     setTimeout(() => {
-      this.send = { send: true, loading: false, message: '' };
+      this.send = { send: true, loading: false, message: '', error: false };
     }, configConstants.timeLoading);
   }
 }
