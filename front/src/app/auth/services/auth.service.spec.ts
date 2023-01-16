@@ -1,4 +1,8 @@
-import { RegisterUserResponseSuccess } from './auth-service.model';
+import { LoginPageModel } from './../pages/login/login-page.model';
+import {
+  RegisterUserResponseSuccess,
+  LoginUserResponseSuccess,
+} from './auth-service.model';
 import { RegisterPageModel } from './../pages/register/register-page.model';
 import { ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
 import { TestBed } from '@angular/core/testing';
@@ -59,6 +63,32 @@ describe('AuthService', () => {
       id: 11,
       createdAt: '2023-01-10T09:46:25.000Z',
       isActive: false,
+    });
+  });
+
+  it('loginUser', (done: DoneFn) => {
+    const user: FormGroup<LoginPageModel> = new FormGroup({
+      email: new FormControl('email@email.es'),
+      password: new FormControl('123123'),
+    });
+
+    service.loginUser(user).subscribe({
+      next: (resp: LoginUserResponseSuccess) => {
+        expect(resp).toEqual({
+          access_token:
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxMiwiZW1haWwiOiJqdWFuam9zZW5hdmFycm9wZXJlYUBnbWFpbC5jb20iLCJuYW1lIjoiSnVhbiBKb3PDqSIsImxhc3RuYW1lIjoiUGVyZWEiLCJjcmVhdGVkQXQiOiIyMDIzLTAxLTEwVDA5OjUzOjQwLjAwMFoiLCJpc0FjdGl2ZSI6ZmFsc2V9LCJpYXQiOjE2NzM4OTQ3MjksImV4cCI6MTY3Mzg5ODMyOX0.7OhXwOhuMbLoBdjYW753ieILmBRLJ4hax-qLOpBm79c',
+        });
+        done();
+      },
+    });
+
+    const req = httpTestingController.expectOne('/api/user/auth/login');
+
+    expect(req.request.method).toEqual('POST');
+
+    req.flush({
+      access_token:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxMiwiZW1haWwiOiJqdWFuam9zZW5hdmFycm9wZXJlYUBnbWFpbC5jb20iLCJuYW1lIjoiSnVhbiBKb3PDqSIsImxhc3RuYW1lIjoiUGVyZWEiLCJjcmVhdGVkQXQiOiIyMDIzLTAxLTEwVDA5OjUzOjQwLjAwMFoiLCJpc0FjdGl2ZSI6ZmFsc2V9LCJpYXQiOjE2NzM4OTQ3MjksImV4cCI6MTY3Mzg5ODMyOX0.7OhXwOhuMbLoBdjYW753ieILmBRLJ4hax-qLOpBm79c',
     });
   });
 });

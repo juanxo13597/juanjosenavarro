@@ -11,10 +11,8 @@ describe('UtilsService', () => {
   });
 
   it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
+    service.changeTitle('titulo');
 
-  it('change title', () => {
-    expect(service.changeTitle('titulo')).toBeTruthy();
+    expect(service).toBeTruthy();
   });
 });

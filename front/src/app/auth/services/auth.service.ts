@@ -1,4 +1,8 @@
-import { RegisterUserResponseSuccess } from './auth-service.model';
+import { LoginPageModel } from './../pages/login/login-page.model';
+import {
+  RegisterUserResponseSuccess,
+  LoginUserResponseSuccess,
+} from './auth-service.model';
 import { endpointsConstants } from './../../constants/endpoints.constants';
 import { FormGroup } from '@angular/forms';
 import { RegisterPageModel } from './../pages/register/register-page.model';
@@ -27,6 +31,20 @@ export class AuthService {
   ): Observable<RegisterUserResponseSuccess> {
     return this.Httpclient.post<RegisterUserResponseSuccess>(
       endpointsConstants.registerUser,
+      user.value
+    );
+  }
+
+  /**
+   * metodo para login de usuario
+   * @param user
+   * @returns
+   */
+  public loginUser(
+    user: FormGroup<LoginPageModel>
+  ): Observable<LoginUserResponseSuccess> {
+    return this.Httpclient.post<LoginUserResponseSuccess>(
+      endpointsConstants.loginUser,
       user.value
     );
   }

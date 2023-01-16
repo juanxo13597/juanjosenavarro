@@ -8,6 +8,7 @@ import { UtilsService } from 'src/app/shared/services/utils.service';
   styleUrls: ['./home-page.component.scss'],
 })
 export class HomePageComponent {
+  /** constructor */
   constructor(private UtilsService: UtilsService) {
     this.UtilsService.changeTitle('Inicio');
   }

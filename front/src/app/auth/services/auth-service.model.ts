@@ -11,3 +11,9 @@ export type RegisterUserResponseSuccess = {
   status?: number;
   message?: string;
 };
+
+/** modelo de respuesta de back del token al iniciar sesion */
+export type LoginUserResponseSuccess = {
+  status?: number;
+  access_token: string;
+};
