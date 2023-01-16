@@ -1,3 +1,4 @@
+import { UtilsService } from './../../../shared/services/utils.service';
 import { configConstants } from './../../../constants/config.constants';
 import { RegisterUserResponseSuccess } from './../../services/auth-service.model';
 import { AuthService } from '../../services/auth.service';
@@ -33,7 +34,13 @@ export class RegisterPageComponent {
    * @param fb
    * @param AuthService
    */
-  constructor(private fb: FormBuilder, private AuthService: AuthService) {
+  constructor(
+    private fb: FormBuilder,
+    private AuthService: AuthService,
+    private UtilsService: UtilsService
+  ) {
+    // change title
+    this.UtilsService.changeTitle('Registro');
     /** inicializacion del form group */
     this.registerForm = this.fb.group({
       email: new FormControl('', [Validators.required, Validators.email]),
